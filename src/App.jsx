@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { api } from "./api"
+import { ZipCodeInfo } from './components/ZipCodeInfo'
+import { Input } from './components/Input'
+import { Footer } from './components/Footer'
 
 
 
@@ -8,77 +11,80 @@ export const App = () => {
 
   const [input, setInput] = useState("")
   const [cep, setCep] = useState(null)
+  const [messageError, setMessageError] = useState("")
+
 
   const handleSearch = async () => {
+
+
+
     if (input === "") {
-      alert("Fill with the zip code")
+      setMessageError("Fill with a brazilian zip code")
       return;
     }
 
     try {
       const response = await api.get(`${input}/json`)
       setCep(response.data)
+      setMessageError("")
       setInput("")
-    }catch {
-      alert("invallid")
+    } catch (error) {
+      setMessageError("Invalid, fill with a brazilian zip code")
+      console.error(error)
       setInput("")
     }
   }
 
 
+  const toReloadPage = () => {
+    location.reload()
+  }
+
+
+
 
 
   return (
-    <main className='bg-blue-200 flex flex-col'>
+    <main className='bg-blue-200 flex flex-col w-screen h-screen p-2 items-center justify-between' >
 
-      {/* principal title */}
-      <h1 className='bg-slate-600 xs:bg-red-400'>ZIP CODE FINDER</h1>
 
-      {/* input for zipcode */}
-      <div>
-        <input
-          type="text"
-          placeholder='Enter a zip code here'
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+      <div className='flex flex-col items-center pt-10 gap-2'>
+        {/* principal title */}
+        <h1 className='bg-slate-600 xs:bg-red-400 font-rozha text-3xl text-white' onClick={toReloadPage}>Zip code finder</h1>
 
-        <button
-          className='flex flex-col'
-          onClick={handleSearch}>
-          <i className="fa-solid fa-magnifying-glass"></i>
-          Search
-        </button>
+
+        {/* input for zipcode */}
+        
+
+          <Input
+            input={input}
+            setInput={setInput}
+            handleSearch={handleSearch}
+          />
+
+        
+
+
+        {/*  message for input errors */}
+        {messageError !== "" &&
+          <p className='text-red-600 text-xs pt-2'>{messageError}</p>
+        }
+
+
+
+        {/* informations about the zip code founded */}
+
+        {cep !== null &&
+          <ZipCodeInfo cep={cep} />
+        }
+
+
+
+
 
       </div>
 
-      {/* informations about the zip code */}
-
-
-    {cep !== null && 
-        <div>
-          <h2>CEP: {cep.cep}</h2>
-          <p>{cep.logradouro}</p>
-          <p>{cep.complemento}</p>
-          <p>{cep.bairro}</p>
-          <p>{cep.localidade}</p>
-          <p>{cep.uf}</p>
-        </div>
-    }
-
-
-
-
-
-
-
-      <footer className="pb-1 text-x">
-        <p>Developed by
-          <a href="https://github.com/thaismoreiradev" target="_blank" rel="noopener noreferrer">Thais
-            Moreira
-          </a>
-        </p>
-      </footer>
+      <Footer />
 
     </main>
 

@@ -8,7 +8,11 @@ module.exports = {
     screens: {
       'xs': '455px'
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        'rozha': ['Rozha One', 'serif']
+      }
+    },
   },
   plugins: [],
 }
