@@ -1,0 +1,1 @@
+This is a zip code finder whith a clean and minimal design, it founds all brazilian zip codes. In this project I use react, tailwind, javascrip, html and an API with the informations for search. Check the result [RIGHT HERE](https://thais-moreira-zip-code-finder.netlify.app/)
