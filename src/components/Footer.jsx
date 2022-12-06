@@ -1,7 +1,7 @@
 
 export const Footer = () => (
 
-    <footer className="text-xs">
+    <footer className="text-xs xs3:text-sm">
         <p>Developed by
             <a
                 href="https://github.com/thaismoreiradev"

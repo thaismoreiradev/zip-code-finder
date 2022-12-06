@@ -45,47 +45,45 @@ export const App = () => {
 
 
   return (
-    <main className='bg-blue-200 flex flex-col w-screen h-screen p-2 items-center justify-between' >
+    <main className='flex items-center justify-center'>
 
 
-      <div className='flex flex-col items-center pt-10 gap-2'>
-        {/* principal title */}
-        <h1 className='bg-slate-600 xs:bg-red-400 font-rozha text-3xl text-white' onClick={toReloadPage}>Zip code finder</h1>
+
+      {/* global container */}
+      <div className='bg-blue-200 flex flex-col w-screen h-screen max-w-[600px] max-h-[750px] p-2 items-center justify-between'>
 
 
-        {/* input for zipcode */}
-        
 
+
+        {/* all zip code container, title, input and result */}
+        <div className='flex flex-col h-full items-center pt-10 xs:pt-20 xs3:pt-28 gap-3 bg-red-700'>
+
+          {/* principal title */}
+          <h1 className='bg-slate-600 font-rozha text-4xl xs:text-4xl xs2:text-5xl text-white' onClick={toReloadPage}>Zip code finder</h1>
+
+
+          {/* input for zipcode */}
           <Input
             input={input}
             setInput={setInput}
             handleSearch={handleSearch}
           />
 
-        
+          {/*  message for input errors */}
+          {messageError !== "" &&
+            <p className='text-red-600 text-xs'>{messageError}</p>
+          }
+
+          {/* informations about the zip code founded */}
+          {cep !== null &&
+            <ZipCodeInfo cep={cep} />
+          }
 
 
-        {/*  message for input errors */}
-        {messageError !== "" &&
-          <p className='text-red-600 text-xs pt-2'>{messageError}</p>
-        }
+        </div>
 
-
-
-        {/* informations about the zip code founded */}
-
-        {cep !== null &&
-          <ZipCodeInfo cep={cep} />
-        }
-
-
-
-
-
+        <Footer />
       </div>
-
-      <Footer />
-
     </main>
 
   )

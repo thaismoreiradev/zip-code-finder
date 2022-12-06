@@ -5,7 +5,7 @@ import { BiSearch } from 'react-icons/bi'
 
 export const Input = ({input, setInput, handleSearch}) => (
 
-    <div className="bg-white flex rounded-sm p-2">
+    <div className="bg-white flex rounded-sm p-2 w-full justify-between">
         <input
             className='outline-none'
             type="text"
@@ -19,7 +19,7 @@ export const Input = ({input, setInput, handleSearch}) => (
             onClick={handleSearch}
         >
             
-            <BiSearch className='text-xl'/>
+            <BiSearch className='text-xl xs3:text-3xl'/>
             {/* <i className="fa-solid fa-magnifying-glass"></i> */}
 
         </button>
